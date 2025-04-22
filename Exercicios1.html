@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive English Exercises</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: white;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .exercise {
+            margin-bottom: 30px;
+        }
+        .question {
+            margin: 10px 0;
+        }
+        input[type="text"] {
+            border: none;
+            border-bottom: 1px solid #333;
+            padding: 5px;
+            margin: 0 5px;
+            width: 100px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .feedback {
+            margin-top: 5px;
+            font-weight: bold;
+        }
+        .correct { color: green; }
+        .incorrect { color: red; }
+    </style>
+</head>
+<body>
+    <h2>1.1 Write the short form.</h2>
+    <div class="exercise">
+        <div class="question">
+            1. she is → <input type="text" id="q1-1" placeholder="she's"> (Correct: "she's")
+        </div>
+        <div class="question">
+            3. it is not → <input type="text" id="q1-3" placeholder="it's not"> (Correct: "it's not" or "it isn't")
+        </div>
+        <!-- Adicione os outros inputs aqui -->
+    </div>
+
+    <h2>1.2 Write am, is, are</h2>
+    <div class="exercise">
+        <div class="question">
+            5. Look! There <input type="text" id="q2-5"> Helen. (Correct: "is")
+        </div>
+        <!-- Adicione os outros campos -->
+    </div>
+
+    <button onclick="checkAnswers()">Check Answers</button>
+
+    <script>
+        function checkAnswers() {
+            // Respostas corretas (exemplo para 1.1 e 1.2)
+            const correctAnswers = {
+                "q1-1": "she's",
+                "q1-3": ["it's not", "it isn't"], // Aceita múltiplas respostas
+                "q2-5": "is"
+            };
+
+            // Verificar cada resposta
+            for (const [id, correct] of Object.entries(correctAnswers)) {
+                const input = document.getElementById(id);
+                const userAnswer = input.value.trim().toLowerCase();
+                const feedback = document.createElement("div");
+                feedback.className = "feedback";
+
+                if (Array.isArray(correct) ? correct.includes(userAnswer) : userAnswer === correct) {
+                    feedback.textContent = "✓ Correct!";
+                    feedback.className += " correct";
+                } else {
+                    feedback.textContent = `✗ Incorrect. The correct answer is "${correct}"`;
+                    feedback.className += " incorrect";
+                }
+
+                input.insertAdjacentElement("afterend", feedback);
+            }
+        }
+    </script>
+</body>
+</html>
